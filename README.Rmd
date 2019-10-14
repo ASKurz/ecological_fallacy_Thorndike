@@ -479,10 +479,23 @@ t13 <-
 ) 
 ```
 
+In Thorndike's example, the data from each of his 12 tables corresponded to "scores for sample persons in each of twelve districts into which a city is divided" (p. 124). For simplicity, he gave the values in a standardized (i.e., *z*-score) metric. Here's a plot of all those data, disaggregated by district. It corresponds directly to the way Thorndike presented the tables in his article. 
 
-
-
-
+```{r, fig.width = 8, fig.height = 12}
+t13 %>% 
+  mutate(table = t) %>% 
+  
+  ggplot(aes(x = a, y = b)) +
+  geom_tile(aes(fill = n)) +
+  geom_text(aes(label = n, color = n < 11),
+            show.legend = F) +
+  scale_fill_viridis_c(option = "C") +
+  scale_color_manual(values = c("black", "white")) +
+  scale_x_continuous(breaks = -4:4, position = "top") +
+  scale_y_continuous(breaks = -4:4, trans = "reverse") +
+  theme(panel.grid = element_blank()) +
+  facet_wrap(~table, ncol = 2, labeller = label_both)
+```
 
 
 

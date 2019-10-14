@@ -499,6 +499,31 @@ t13 <-
 ) 
 ```
 
+In Thorndike’s example, the data from each of his 12 tables corresponded
+to “scores for sample persons in each of twelve districts into which a
+city is divided” (p. 124). For simplicity, he gave the values in a
+standardized (i.e., *z*-score) metric. Here’s a plot of all those data,
+disaggregated by district. It corresponds directly to the way Thorndike
+presented the tables in his article.
+
+``` r
+t13 %>% 
+  mutate(table = t) %>% 
+  
+  ggplot(aes(x = a, y = b)) +
+  geom_tile(aes(fill = n)) +
+  geom_text(aes(label = n, color = n < 11),
+            show.legend = F) +
+  scale_fill_viridis_c(option = "C") +
+  scale_color_manual(values = c("black", "white")) +
+  scale_x_continuous(breaks = -4:4, position = "top") +
+  scale_y_continuous(breaks = -4:4, trans = "reverse") +
+  theme(panel.grid = element_blank()) +
+  facet_wrap(~table, ncol = 2, labeller = label_both)
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
+
 Session info
 ------------
 
@@ -526,15 +551,20 @@ sessionInfo()
     ## [9] tidyverse_1.2.1
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Rcpp_1.0.2       cellranger_1.1.0 pillar_1.4.2     compiler_3.6.0  
-    ##  [5] tools_3.6.0      zeallot_0.1.0    digest_0.6.21    lubridate_1.7.4 
-    ##  [9] jsonlite_1.6     evaluate_0.14    lifecycle_0.1.0  nlme_3.1-139    
-    ## [13] gtable_0.3.0     lattice_0.20-38  pkgconfig_2.0.3  rlang_0.4.0     
-    ## [17] cli_1.1.0        rstudioapi_0.10  yaml_2.2.0       haven_2.1.0     
-    ## [21] xfun_0.10        withr_2.1.2      xml2_1.2.0       httr_1.4.0      
-    ## [25] knitr_1.23       hms_0.4.2        generics_0.0.2   vctrs_0.2.0     
-    ## [29] grid_3.6.0       tidyselect_0.2.5 glue_1.3.1       R6_2.4.0        
-    ## [33] readxl_1.3.1     rmarkdown_1.13   modelr_0.1.4     magrittr_1.5    
-    ## [37] backports_1.1.5  scales_1.0.0     htmltools_0.4.0  rvest_0.3.4     
-    ## [41] assertthat_0.2.1 colorspace_1.4-1 stringi_1.4.3    lazyeval_0.2.2  
-    ## [45] munsell_0.5.0    broom_0.5.2      crayon_1.3.4
+    ##  [1] Rcpp_1.0.2        cellranger_1.1.0  pillar_1.4.2     
+    ##  [4] compiler_3.6.0    tools_3.6.0       zeallot_0.1.0    
+    ##  [7] digest_0.6.21     viridisLite_0.3.0 lubridate_1.7.4  
+    ## [10] jsonlite_1.6      evaluate_0.14     lifecycle_0.1.0  
+    ## [13] nlme_3.1-139      gtable_0.3.0      lattice_0.20-38  
+    ## [16] pkgconfig_2.0.3   rlang_0.4.0       cli_1.1.0        
+    ## [19] rstudioapi_0.10   yaml_2.2.0        haven_2.1.0      
+    ## [22] xfun_0.10         withr_2.1.2       xml2_1.2.0       
+    ## [25] httr_1.4.0        knitr_1.23        hms_0.4.2        
+    ## [28] generics_0.0.2    vctrs_0.2.0       grid_3.6.0       
+    ## [31] tidyselect_0.2.5  glue_1.3.1        R6_2.4.0         
+    ## [34] readxl_1.3.1      rmarkdown_1.13    modelr_0.1.4     
+    ## [37] magrittr_1.5      backports_1.1.5   scales_1.0.0     
+    ## [40] htmltools_0.4.0   rvest_0.3.4       assertthat_0.2.1 
+    ## [43] colorspace_1.4-1  labeling_0.3      stringi_1.4.3    
+    ## [46] lazyeval_0.2.2    munsell_0.5.0     broom_0.5.2      
+    ## [49] crayon_1.3.4
