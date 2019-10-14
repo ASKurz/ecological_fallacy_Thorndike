@@ -8,9 +8,11 @@ Here's how Thorndike began his paper:
 
 Thorndike referred to an example of this mistake from the literature of his time, which we won't get into, here. He then worked through the fallacy with 12 simulated data sets. We'll cover those in detail. In each of his synthetic data sets, "A is supposed to be intelligence quotient and B is supposed to be the fraction of a room or number of rooms per person" (p. 124). That is, he was covering the correlation between IQ and the crowdedness of one's living conditions. 
 
-Here we'll copy down the data into a series of tribbles.
+Here we'll copy down the data into a series of [tribble](https://tibble.tidyverse.org/reference/tribble.html)s.
 
-```{r}
+```{r, warning = F, message = F}
+library(tidyverse)
+
 # table I
 t1 <-
   tribble(
@@ -448,6 +450,26 @@ t12 <-
   2, 5, 1,
   3, 5, 1,
   4, 5, 1
+) 
+```
+
+We'll combine them, here.
+
+```{r}
+t13 <-
+  bind_rows(
+  t1  %>% mutate(t = 1),
+  t2  %>% mutate(t = 2),
+  t3  %>% mutate(t = 3),
+  t4  %>% mutate(t = 4),
+  t5  %>% mutate(t = 5),
+  t6  %>% mutate(t = 6),
+  t7  %>% mutate(t = 7),
+  t8  %>% mutate(t = 8),
+  t9  %>% mutate(t = 9),
+  t10 %>% mutate(t = 10),
+  t11 %>% mutate(t = 11),
+  t12 %>% mutate(t = 12)
 ) 
 ```
 
