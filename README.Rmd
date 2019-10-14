@@ -497,15 +497,79 @@ t13 %>%
   facet_wrap(~table, ncol = 2, labeller = label_both)
 ```
 
+Thorndike asserted that "within each of the districts the correlation between A and B is zero" (p. 124). Let's check.
+ 
+```{r}
+t13 %>% 
+  uncount(n) %>% 
+  group_by(t) %>% 
+  summarise(r = cor(a, b))
+```
 
+Yep. Those correlations are zero for each. Here's what the data look like if you naïvely combine the numbers from all districts.
 
+```{r, fig.width = 6, fig.height = 3}
+t13 %>% 
+  uncount(n) %>% 
+  group_by(a, b) %>% 
+  count() %>% 
+  
+  ggplot(aes(x = a, y = b)) +
+  geom_tile(aes(fill = n)) +
+  geom_text(aes(label = n, color = n < 20),
+            show.legend = F) +
+  scale_fill_viridis_c(option = "C") +
+  scale_color_manual(values = c("black", "white")) +
+  scale_x_continuous(breaks = -4:5, position = "top") +
+  scale_y_continuous(breaks = -4:5, trans = "reverse") +
+  theme(panel.grid = element_blank())
+```
 
+This corresponds to Thorndike's Table XIII. If you look closely at his original, you'll see he miscounted a few cells. No worry. The overall findings are still sound. Here's the bivariate correlation for the naïvely combined data.
 
+```{r}
+t13 %>% 
+  uncount(n) %>% 
+  summarise(r = cor(a, b))
+```
 
+But what if we look at aggregated data? To do so, we’ll take the mean of `a` and `b` from each of the districts. Here’s what that plot might look like.
 
+```{r, fig.width = 6, fig.height = 3}
+t13 %>%
+  uncount(n) %>% 
+  group_by(t) %>% 
+  summarise(a = mean(a),
+            b = mean(b)) %>% 
+  count(a, b) %>% 
+  
+  ggplot(aes(x = a, y = b)) +
+  geom_tile(aes(fill = n)) +
+  geom_text(aes(label = n, color = n < 2),
+            show.legend = F) +
+  scale_fill_viridis_c(option = "C") +
+  scale_color_manual(values = c("black", "white")) +
+  scale_x_continuous(breaks = -4:5, position = "top") +
+  scale_y_continuous(breaks = -4:5, trans = "reverse") +
+  theme(panel.grid = element_blank())
+```
 
+That plot corresponds directly to Thorndike's Table XIV. Here's the corresponding correlation.
 
+```{r}
+t13 %>%
+  uncount(n) %>% 
+  group_by(t) %>% 
+  summarise(mu_a = mean(a),
+            mu_b = mean(b)) %>% 
+  summarise(r = cor(mu_a, mu_b))
+```
 
+To recap, within each district, the correlation is exactly 0. When we naively combine all the data, the correlation is about .45. When we aggregate the data, the correlation goes to .9. We might as well finish right where we started.
+
+> If the correlation between two traits, A and B (say, poverty and delinquency), in *n* groups (say, the residents of *w* districts) has a certain value, K, the correlation between A and B in the individuals or the families composing the groups need not be K and will not be, save in very special circumstances. (p. 122)
+
+That is, the results from group-level data will not necessarily correspond to the results of subgroup- or individual-level data.
 
 ## Session info
 

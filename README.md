@@ -524,6 +524,126 @@ t13 %>%
 
 ![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
+Thorndike asserted that “within each of the districts the correlation
+between A and B is zero” (p. 124). Let’s check.
+
+``` r
+t13 %>% 
+  uncount(n) %>% 
+  group_by(t) %>% 
+  summarise(r = cor(a, b))
+```
+
+    ## # A tibble: 12 x 2
+    ##        t     r
+    ##    <dbl> <dbl>
+    ##  1     1     0
+    ##  2     2     0
+    ##  3     3     0
+    ##  4     4     0
+    ##  5     5     0
+    ##  6     6     0
+    ##  7     7     0
+    ##  8     8     0
+    ##  9     9     0
+    ## 10    10     0
+    ## 11    11     0
+    ## 12    12     0
+
+Yep. Those correlations are zero for each. Here’s what the data look
+like if you naïvely combine the numbers from all districts.
+
+``` r
+t13 %>% 
+  uncount(n) %>% 
+  group_by(a, b) %>% 
+  count() %>% 
+  
+  ggplot(aes(x = a, y = b)) +
+  geom_tile(aes(fill = n)) +
+  geom_text(aes(label = n, color = n < 20),
+            show.legend = F) +
+  scale_fill_viridis_c(option = "C") +
+  scale_color_manual(values = c("black", "white")) +
+  scale_x_continuous(breaks = -4:5, position = "top") +
+  scale_y_continuous(breaks = -4:5, trans = "reverse") +
+  theme(panel.grid = element_blank())
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+
+This corresponds to Thorndike’s Table XIII. If you look closely at his
+original, you’ll see he miscounted a few cells. No worry. The overall
+findings are still sound. Here’s the bivariate correlation for the
+naïvely combined data.
+
+``` r
+t13 %>% 
+  uncount(n) %>% 
+  summarise(r = cor(a, b))
+```
+
+    ## # A tibble: 1 x 1
+    ##       r
+    ##   <dbl>
+    ## 1 0.454
+
+But what if we look at aggregated data? To do so, we’ll take the mean of
+`a` and `b` from each of the districts. Here’s what that plot might look
+like.
+
+``` r
+t13 %>%
+  uncount(n) %>% 
+  group_by(t) %>% 
+  summarise(a = mean(a),
+            b = mean(b)) %>% 
+  count(a, b) %>% 
+  
+  ggplot(aes(x = a, y = b)) +
+  geom_tile(aes(fill = n)) +
+  geom_text(aes(label = n, color = n < 2),
+            show.legend = F) +
+  scale_fill_viridis_c(option = "C") +
+  scale_color_manual(values = c("black", "white")) +
+  scale_x_continuous(breaks = -4:5, position = "top") +
+  scale_y_continuous(breaks = -4:5, trans = "reverse") +
+  theme(panel.grid = element_blank())
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-7-1.png)
+
+That plot corresponds directly to Thorndike’s Table XIV. Here’s the
+corresponding correlation.
+
+``` r
+t13 %>%
+  uncount(n) %>% 
+  group_by(t) %>% 
+  summarise(mu_a = mean(a),
+            mu_b = mean(b)) %>% 
+  summarise(r = cor(mu_a, mu_b))
+```
+
+    ## # A tibble: 1 x 1
+    ##       r
+    ##   <dbl>
+    ## 1 0.914
+
+To recap, within each district, the correlation is exactly 0. When we
+naively combine all the data, the correlation is about .45. When we
+aggregate the data, the correlation goes to .9. We might as well finish
+right where we started.
+
+> If the correlation between two traits, A and B (say, poverty and
+> delinquency), in *n* groups (say, the residents of *w* districts) has
+> a certain value, K, the correlation between A and B in the individuals
+> or the families composing the groups need not be K and will not be,
+> save in very special circumstances. (p. 122)
+
+That is, the results from group-level data will not necessarily
+correspond to the results of subgroup- or individual-level data.
+
 Session info
 ------------
 
@@ -551,20 +671,20 @@ sessionInfo()
     ## [9] tidyverse_1.2.1
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Rcpp_1.0.2        cellranger_1.1.0  pillar_1.4.2     
-    ##  [4] compiler_3.6.0    tools_3.6.0       zeallot_0.1.0    
-    ##  [7] digest_0.6.21     viridisLite_0.3.0 lubridate_1.7.4  
-    ## [10] jsonlite_1.6      evaluate_0.14     lifecycle_0.1.0  
-    ## [13] nlme_3.1-139      gtable_0.3.0      lattice_0.20-38  
-    ## [16] pkgconfig_2.0.3   rlang_0.4.0       cli_1.1.0        
-    ## [19] rstudioapi_0.10   yaml_2.2.0        haven_2.1.0      
-    ## [22] xfun_0.10         withr_2.1.2       xml2_1.2.0       
-    ## [25] httr_1.4.0        knitr_1.23        hms_0.4.2        
-    ## [28] generics_0.0.2    vctrs_0.2.0       grid_3.6.0       
-    ## [31] tidyselect_0.2.5  glue_1.3.1        R6_2.4.0         
-    ## [34] readxl_1.3.1      rmarkdown_1.13    modelr_0.1.4     
-    ## [37] magrittr_1.5      backports_1.1.5   scales_1.0.0     
-    ## [40] htmltools_0.4.0   rvest_0.3.4       assertthat_0.2.1 
-    ## [43] colorspace_1.4-1  labeling_0.3      stringi_1.4.3    
-    ## [46] lazyeval_0.2.2    munsell_0.5.0     broom_0.5.2      
-    ## [49] crayon_1.3.4
+    ##  [1] tidyselect_0.2.5  xfun_0.10         haven_2.1.0      
+    ##  [4] lattice_0.20-38   colorspace_1.4-1  vctrs_0.2.0      
+    ##  [7] generics_0.0.2    htmltools_0.4.0   viridisLite_0.3.0
+    ## [10] yaml_2.2.0        utf8_1.1.4        rlang_0.4.0      
+    ## [13] pillar_1.4.2      glue_1.3.1        withr_2.1.2      
+    ## [16] modelr_0.1.4      readxl_1.3.1      lifecycle_0.1.0  
+    ## [19] munsell_0.5.0     gtable_0.3.0      cellranger_1.1.0 
+    ## [22] rvest_0.3.4       evaluate_0.14     labeling_0.3     
+    ## [25] knitr_1.23        fansi_0.4.0       broom_0.5.2      
+    ## [28] Rcpp_1.0.2        scales_1.0.0      backports_1.1.5  
+    ## [31] jsonlite_1.6      hms_0.4.2         digest_0.6.21    
+    ## [34] stringi_1.4.3     grid_3.6.0        cli_1.1.0        
+    ## [37] tools_3.6.0       magrittr_1.5      lazyeval_0.2.2   
+    ## [40] crayon_1.3.4      pkgconfig_2.0.3   zeallot_0.1.0    
+    ## [43] xml2_1.2.0        lubridate_1.7.4   assertthat_0.2.1 
+    ## [46] rmarkdown_1.13    httr_1.4.0        rstudioapi_0.10  
+    ## [49] R6_2.4.0          nlme_3.1-139      compiler_3.6.0
