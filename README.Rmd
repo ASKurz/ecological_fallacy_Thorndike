@@ -533,7 +533,7 @@ t13 %>%
   summarise(r = cor(a, b))
 ```
 
-But what if we look at aggregated data? To do so, we’ll take the mean of `a` and `b` from each of the districts. Here’s what that plot might look like.
+But what if we look at aggregated data? To do so, we'll take the mean of `a` and `b` from each of the districts. Here's what that plot might look like.
 
 ```{r, fig.width = 6, fig.height = 3}
 t13 %>%
@@ -554,7 +554,7 @@ t13 %>%
   theme(panel.grid = element_blank())
 ```
 
-That plot corresponds directly to Thorndike's Table XIV. Here's the corresponding correlation.
+That plot corresponds directly to Thorndike's Table XIV. Here's the correlation.
 
 ```{r}
 t13 %>%
@@ -565,11 +565,11 @@ t13 %>%
   summarise(r = cor(mu_a, mu_b))
 ```
 
-To recap, within each district, the correlation is exactly 0. When we naively combine all the data, the correlation is about .45. When we aggregate the data, the correlation goes to .9. We might as well finish right where we started.
+To recap, within each district the correlation is exactly 0. When we naïvely combine all the data, the correlation is about .45. When we aggregate the data, the correlation goes to .91. We might as well finish right where we started.
 
 > If the correlation between two traits, A and B (say, poverty and delinquency), in *n* groups (say, the residents of *w* districts) has a certain value, K, the correlation between A and B in the individuals or the families composing the groups need not be K and will not be, save in very special circumstances. (p. 122)
 
-That is, the results from group-level data will not necessarily correspond to the results of subgroup- or individual-level data.
+That is, the results from group-level data will not necessarily correspond to the results of subgroup- or individual-level data. Proceed with caution.
 
 ## Session info
 

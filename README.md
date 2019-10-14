@@ -614,7 +614,7 @@ t13 %>%
 ![](README_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 That plot corresponds directly to Thorndike’s Table XIV. Here’s the
-corresponding correlation.
+correlation.
 
 ``` r
 t13 %>%
@@ -630,9 +630,9 @@ t13 %>%
     ##   <dbl>
     ## 1 0.914
 
-To recap, within each district, the correlation is exactly 0. When we
-naively combine all the data, the correlation is about .45. When we
-aggregate the data, the correlation goes to .9. We might as well finish
+To recap, within each district the correlation is exactly 0. When we
+naïvely combine all the data, the correlation is about .45. When we
+aggregate the data, the correlation goes to .91. We might as well finish
 right where we started.
 
 > If the correlation between two traits, A and B (say, poverty and
@@ -642,7 +642,8 @@ right where we started.
 > save in very special circumstances. (p. 122)
 
 That is, the results from group-level data will not necessarily
-correspond to the results of subgroup- or individual-level data.
+correspond to the results of subgroup- or individual-level data. Proceed
+with caution.
 
 Session info
 ------------
