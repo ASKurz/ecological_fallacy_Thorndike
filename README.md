@@ -527,7 +527,7 @@ t13 %>%
   facet_wrap(~table, ncol = 2, labeller = label_both)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
+<img src="README_files/figure-markdown_github/unnamed-chunk-4-1.png" width="768" />
 
 Thorndike asserted that “within each of the districts the correlation
 between A and B is zero” (p. 124). Let’s check.
@@ -575,7 +575,7 @@ t13 %>%
   theme(panel.grid = element_blank())
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+<img src="README_files/figure-markdown_github/unnamed-chunk-6-1.png" width="576" />
 
 This corresponds to Thorndike’s Table XIII. If you look closely at his
 original, you’ll see he miscounted a few cells. No worry–the overall
@@ -616,7 +616,7 @@ t13 %>%
   theme(panel.grid = element_blank())
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-7-1.png)
+<img src="README_files/figure-markdown_github/unnamed-chunk-8-1.png" width="576" />
 
 That plot corresponds directly to Thorndike’s Table XIV. Here’s the
 correlation.
@@ -715,8 +715,8 @@ Robinson, W. S. (1950). Ecological correlations and the behavior of
 individuals. *American Sociological Review*, *15*(3).
 <https://doi.org/10.2307/2087176>
 
-Selvin, H. C. (1958). Durkheim’s Suicide and Problems of Empirical
-Research. *American Journal of Sociology*, *63*(6), 607–619.
+Selvin, H. C. (1958). Durkheim’s suicide and problems of empirical
+research. *American Journal of Sociology*, *63*(6), 607–619.
 <https://doi.org/10.1086/222356>
 
 Thorndike, E. L. (1939). On the fallacy of imputing the correlations
