@@ -2,19 +2,23 @@
 output:
   md_document:
     variant: markdown_github
+bibliography: bib.bib
+biblio-style: apalike
+csl: apa.csl
+link-citations: yes
 ---
 
 # The ecologocal fallacy: Thorndike's (1939) example
 
-The ecological fallacy occurs when results from group-level analyses are wrongly extended to individuals. The fallacy is often attributed to William S. Robinson's (1950) paper [*Ecological Correlations and the Behavior of Individuals*](https://www.jstor.org/stable/2087176?origin=crossref&seq=1#page_scan_tab_contents) and the name itself first appeared in sociologist Hanan C. Selvin's (1958) paper, [*Durkheim's suicide and problems of empirical research*](https://s3.amazonaws.com/academia.edu.documents/33024288/Durkheim-suicide_empirical-research-problems.pdf?response-content-disposition=inline%3B%20filename%3DDurkheims_Suicide_and_Problems_of_Empiri.pdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWOWYYGZ2Y53UL3A%2F20191014%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20191014T151247Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=4e9eeb342fa0332cd0f7ed00a4769661cb7c6921e07dd19a763595f037d35dae). However, my fellow psychologists might be happy to learn the idea goes back at least as far as E. L. Thorndike's (1939) paper, [*On the fallacy of imputing the correlations found for groups to the individuals or smaller groups composing them*](https://www.jstor.org/stable/1416673?seq=1#page_scan_tab_contents). The purpose of this project is to walk out Thorndike's original examples.
+The ecological fallacy occurs when results from group-level analyses are wrongly extended to individuals. The fallacy is often attributed to William S. Robinson's [-@robinsonEcologicalCorrelations1950] paper, [*Ecological correlations and the behavior of individuals*](https://www.jstor.org/stable/2087176?origin=crossref&seq=1#page_scan_tab_contents), and the name itself first appeared in sociologist Hanan C. Selvin's [-@selvinDurkheimSuicideProblems1958] paper, [*Durkheim's suicide and problems of empirical research*](https://s3.amazonaws.com/academia.edu.documents/33024288/Durkheim-suicide_empirical-research-problems.pdf?response-content-disposition=inline%3B%20filename%3DDurkheims_Suicide_and_Problems_of_Empiri.pdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWOWYYGZ2Y53UL3A%2F20191014%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20191014T151247Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=4e9eeb342fa0332cd0f7ed00a4769661cb7c6921e07dd19a763595f037d35dae). However, my fellow psychologists might be happy to learn the idea goes back at least as far as E. L. Thorndike's [-@thorndikeFallacyImputingCorrelations1939] paper, [*On the fallacy of imputing the correlations found for groups to the individuals or smaller groups composing them*](https://www.jstor.org/stable/1416673?seq=1#page_scan_tab_contents). The purpose of this project is to walk out Thorndike's original examples.
 
 Here's how Thorndike began his paper:
 
 > If the correlation between two traits, A and B (say, poverty and delinquency), in *n* groups (say, the residents of *w* districts) has a certain value, K, the correlation between A and B in the individuals or the families composing the groups need not be K and will not be, save in very special circumstances. (p. 122)
 
-Thorndike referred to an example of this mistake from the literature of his time, which we won't get into, here. He then worked through the fallacy with 12 simulated data sets. We'll cover those in detail. In each of his synthetic data sets, "A is supposed to be intelligence quotient and B is supposed to be the fraction of a room or number of rooms per person" (p. 124). That is, he was covering the correlation between IQ and the crowdedness of one's living conditions. 
+Thorndike referred to an example of this mistake from the literature of his time, which we won't get into, here. He then worked through the fallacy with 12 simulated data sets. We'll cover those in detail. In each of his synthetic data sets, "A is supposed to be intelligence quotient and B is supposed to be the fraction of a room or number of rooms per person" (p. 124). That is, he was covering the correlation between IQ and the crowdedness of one's living conditions.
 
-Here we'll copy down the data into a series of [tribble](https://tibble.tidyverse.org/reference/tribble.html)s.
+Here we'll copy down the data into a series of [tribble](https://tibble.tidyverse.org/reference/tribble.html)s [see @R-tibble; also @R-tidyverse; @wickhamWelcomeTidyverse2019].
 
 ```{r, warning = F, message = F}
 library(tidyverse)
@@ -479,7 +483,7 @@ t13 <-
 ) 
 ```
 
-In Thorndike's example, the data from each of his 12 tables corresponded to "scores for sample persons in each of twelve districts into which a city is divided" (p. 124). For simplicity, he gave the values in a standardized (i.e., *z*-score) metric. Here's a plot of all those data, disaggregated by district. It corresponds directly to the way Thorndike presented the tables in his article. 
+In Thorndike's example, the data from each of his 12 tables corresponded to "scores for sample persons in each of twelve districts into which a city is divided" (p. 124). For simplicity, he gave the values in a standardized (i.e., *z*-score) metric. Here's a plot of all those data, disaggregated by district. It corresponds directly to the way Thorndike presented the tables in his article.
 
 ```{r, fig.width = 8, fig.height = 12}
 t13 %>% 
@@ -489,7 +493,7 @@ t13 %>%
   geom_tile(aes(fill = n)) +
   geom_text(aes(label = n, color = n < 11),
             show.legend = F) +
-  scale_fill_viridis_c(option = "C") +
+  scale_fill_viridis_c(expression(italic(n)), option = "C", limits = c(0, NA)) +
   scale_color_manual(values = c("black", "white")) +
   scale_x_continuous(breaks = -4:4, position = "top") +
   scale_y_continuous(breaks = -4:4, trans = "reverse") +
@@ -499,7 +503,7 @@ t13 %>%
 
 Thorndike asserted that "within each of the districts the correlation between A and B is zero" (p. 124). Let's check.
  
-```{r}
+```{r, warning = F, message = F}
 t13 %>% 
   uncount(n) %>% 
   group_by(t) %>% 
@@ -518,14 +522,14 @@ t13 %>%
   geom_tile(aes(fill = n)) +
   geom_text(aes(label = n, color = n < 20),
             show.legend = F) +
-  scale_fill_viridis_c(option = "C") +
+  scale_fill_viridis_c(expression(italic(n)), option = "C", limits = c(0, NA)) +
   scale_color_manual(values = c("black", "white")) +
   scale_x_continuous(breaks = -4:5, position = "top") +
   scale_y_continuous(breaks = -4:5, trans = "reverse") +
   theme(panel.grid = element_blank())
 ```
 
-This corresponds to Thorndike's Table XIII. If you look closely at his original, you'll see he miscounted a few cells. No worry. The overall findings are still sound. Here's the bivariate correlation for the naïvely combined data.
+This corresponds to Thorndike's Table XIII. If you look closely at his original, you'll see he miscounted a few cells. No worry--the overall findings are still sound. Here's the bivariate correlation for the naïvely combined data.
 
 ```{r}
 t13 %>% 
@@ -535,7 +539,7 @@ t13 %>%
 
 But what if we look at aggregated data? To do so, we'll take the mean of `a` and `b` from each of the districts. Here's what that plot might look like.
 
-```{r, fig.width = 6, fig.height = 3}
+```{r, fig.width = 6, fig.height = 3, warning = F, message = F}
 t13 %>%
   uncount(n) %>% 
   group_by(t) %>% 
@@ -547,7 +551,7 @@ t13 %>%
   geom_tile(aes(fill = n)) +
   geom_text(aes(label = n, color = n < 2),
             show.legend = F) +
-  scale_fill_viridis_c(option = "C") +
+  scale_fill_viridis_c(expression(italic(n)), option = "C", breaks = 1:2) +
   scale_color_manual(values = c("black", "white")) +
   scale_x_continuous(breaks = -4:5, position = "top") +
   scale_y_continuous(breaks = -4:5, trans = "reverse") +
@@ -556,7 +560,7 @@ t13 %>%
 
 That plot corresponds directly to Thorndike's Table XIV. Here's the correlation.
 
-```{r}
+```{r, warning = F, message = F}
 t13 %>%
   uncount(n) %>% 
   group_by(t) %>% 
@@ -569,10 +573,14 @@ To recap, within each district the correlation is exactly 0. When we naïvely co
 
 > If the correlation between two traits, A and B (say, poverty and delinquency), in *n* groups (say, the residents of *w* districts) has a certain value, K, the correlation between A and B in the individuals or the families composing the groups need not be K and will not be, save in very special circumstances. (p. 122)
 
-That is, the results from group-level data will not necessarily correspond to the results of subgroup- or individual-level data. Proceed with caution.
+That is, the results from group-level data will not necessarily correspond to the results of subgroup- or individual-level data. Proceed with caution. To learn more about this phenomena, see the [-@hamakerWhyResearchersShould2012] chapter by Hamaker or the paper by @kievitSimpsonParadoxPsychological2013.
 
 ## Session info
 
 ```{r}
 sessionInfo()
 ```
+
+## References
+
+
