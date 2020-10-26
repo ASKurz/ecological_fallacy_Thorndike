@@ -1,6 +1,8 @@
 The ecologocal fallacy: Thorndike’s (1939) example
 ==================================================
 
+[![DOI](https://zenodo.org/badge/215094992.svg)](https://zenodo.org/badge/latestdoi/215094992)
+
 The ecological fallacy occurs when results from group-level analyses are
 wrongly extended to individuals. The fallacy is often attributed to
 William S. Robinson’s ([1950](#ref-robinsonEcologicalCorrelations1950))
