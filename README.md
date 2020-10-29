@@ -1,17 +1,15 @@
 The ecologocal fallacy: Thorndike’s (1939) example
 ==================================================
 
-[![DOI](https://zenodo.org/badge/215094992.svg)](https://zenodo.org/badge/latestdoi/215094992)
-
 The ecological fallacy occurs when results from group-level analyses are
 wrongly extended to individuals. The fallacy is often attributed to
 William S. Robinson’s ([1950](#ref-robinsonEcologicalCorrelations1950))
 paper, [*Ecological correlations and the behavior of
-individuals*](https://www.jstor.org/stable/2087176?origin=crossref&seq=1#page_scan_tab_contents),
-and the name itself first appeared in sociologist Hanan C. Selvin’s
+individuals*](https://academic.oup.com/ije/article/38/2/337/658252), and
+the name itself first appeared in sociologist Hanan C. Selvin’s
 ([1958](#ref-selvinDurkheimSuicideProblems1958)) paper, [*Durkheim’s
 suicide and problems of empirical
-research*](https://s3.amazonaws.com/academia.edu.documents/33024288/Durkheim-suicide_empirical-research-problems.pdf?response-content-disposition=inline%3B%20filename%3DDurkheims_Suicide_and_Problems_of_Empiri.pdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWOWYYGZ2Y53UL3A%2F20191014%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20191014T151247Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=4e9eeb342fa0332cd0f7ed00a4769661cb7c6921e07dd19a763595f037d35dae).
+research*](https://d1wqtxts1xzle7.cloudfront.net/33024288/Durkheim-suicide_empirical-research-problems.pdf?1392728055=&response-content-disposition=inline%3B+filename%3DDurkheims_Suicide_and_Problems_of_Empiri.pdf&Expires=1603941022&Signature=K1tMxgcPcR5d28KgPUDAxH6-F~aLs2nqXGiNhJpgcqxSXPo0rjqqnsImLGvv-FdfdYGIeMtKWhRmeZG4RFnHRDQOXTguGsirusuch7WEVeDdaR1YUEia6fwlg~SHYERWbBPTCGuB0vqxHlQgGyzkfy7yaTOCfvMdbu-EH-HYEnmm8EBv2xFtejMhkXoSf-HwkPrDf3HCrIzquq2vpXA260McsZWl6PBJ-C542SGQ7V9iEdpJly8Y0mjLUriqddPWkxZKR35NKRlPTd53kU1F11NCMaYy3vuA9zEHqadXTMAWIQzJRbvrYbAeP5uOp2aaRLIwiMVbFGeYvWwxkDl8wg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA).
 However, my fellow psychologists might be happy to learn the idea goes
 back at least as far as E. L. Thorndike’s
 ([1939](#ref-thorndikeFallacyImputingCorrelations1939)) paper, [*On the
